@@ -6,6 +6,8 @@ import Item from "./components/Item";
 import Search from "./components/Search";
 import NotFound from "./components/NotFound";
 
+
+
 class App extends Component {
   // Prevent page reload, clear input, set URL and push history on submit
   handleSubmit = (e, history, searchInput) => {
@@ -15,24 +17,25 @@ class App extends Component {
     history.push(url);
   };
 
+
   render() {
     return (
       <PhotoContextProvider>
-        <HashRouter basename="/SnapScout">
+        <HashRouter basename="/SnapScout"> {/*basename = The base URL for all locations. A properly formatted basename should have a leading slash, but no trailing slash. https://v5.reactrouter.com/web/api/HashRouter*/}
           <div className="container">
             <Route
-              render={props => (
+              render={props => ( 
                 <Header
                   handleSubmit={this.handleSubmit}
                   history={props.history}
                 />
               )}
-            />
+            /> {/*When the <Route>'s path matches the current URL, it renders its children (your component). https://v5.reactrouter.com/web/api/Route */}
             <Switch>
               <Route
                 exact
                 path="/"
-                render={() => <Redirect to="/mountain" />}
+                render={() => <Redirect to="/beach" />}
               />
 
               <Route
@@ -42,6 +45,7 @@ class App extends Component {
               <Route path="/beach" render={() => <Item searchTerm="beach" />} />
               <Route path="/bird" render={() => <Item searchTerm="bird" />} />
               <Route path="/food" render={() => <Item searchTerm="food" />} />
+              <Route path="/paris" render={() => <Item searchTerm="sun" />} />
               <Route
                 path="/search/:searchInput"
                 render={props => (
